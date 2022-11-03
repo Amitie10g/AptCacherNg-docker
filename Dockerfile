@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM phusion/baseimage
 
 VOLUME ["/var/cache/apt-cacher-ng"]
 ARG DEBIAN_FRONTEND=noninteractive
