@@ -9,7 +9,7 @@ This container image allows to dockerize [AptCacherNg](https://wiki.debian.org/A
 Start AptCacherNg container, using a dedicated network
 ```
 docker network create mynetwork
-docker run -d -p 3142:3142 --network=mynetwork -v $(pwd)/cache:/var/cache/apt-cacher-ng amitie10g/apt-cacher-ng
+docker run -d -p 3142:3142 --network=mynetwork --name aptcacherng -v $(pwd)/cache:/var/cache/apt-cacher-ng amitie10g/apt-cacher-ng
 ```
 
 ### Building your container
@@ -30,13 +30,13 @@ rm /etc/apt/apt.conf.d/01proxy
 Then, build your container:
 
 ```
-docker build --network=mynetwork -v APT_CACHE=<proxy IP address> -t <your container:tag> .
+docker build --network=mynetwork -v APT_CACHE=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' aptcacherng) -t <your container:tag> .
 ```
 
 ### Running your container
 
 ```
-docker run --network=mynetwork -v APT_CACHE=<proxy IP address> <your container:tag>  <commands>
+docker run --network=mynetwork -v APT_CACHE=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' aptcacherng) <your container:tag>  <commands>
 ```
 
 ## Licensing
