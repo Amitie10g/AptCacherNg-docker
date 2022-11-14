@@ -8,7 +8,7 @@ This container image allows to dockerize [AptCacherNg](https://wiki.debian.org/A
 
 Start AptCacherNg container, using a dedicated network
 ```
-docker run -d -p 3142:3142 --name aptcacherng -v $(pwd)/cache:/var/cache/apt-cacher-ng amitie10g/apt-cacher-ng
+docker run -d -p 3142:3142 --name apt-cacher-ng -v $(pwd)/cache:/var/cache/apt-cacher-ng amitie10g/apt-cacher-ng
 ```
 
 ### Building your container
@@ -29,7 +29,7 @@ rm /etc/apt/apt.conf.d/01proxy
 Then, build your container:
 
 ```
-docker build -v APT_CACHE=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' aptcacherng) -t <your container:tag> .
+docker build -v APT_CACHE=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' apt-cacher-ng) -t <your container:tag> .
 ```
 
 ### Running your container
