@@ -5,7 +5,10 @@ steps:
    secretEnv: ['USERNAME', 'PASSWORD']
  - name: 'gcr.io/cloud-builders/docker'
    entrypoint: 'bash'
-   args: ['-c', 'docker buildx create --use'] 
+   args: ['-c', 'docker buildx create --use']
+ - name: 'gcr.io/cloud-builders/docker'
+   entrypoint: 'bash'
+   args: ['-c', 'docker run --rm --privileged tonistiigi/binfmt --install all']
  - name: 'gcr.io/cloud-builders/docker'
    entrypoint: 'bash'
    args: ['-c', 'docker buildx build -t $$USERNAME/${REPO_NAME}:${TAG_NAME} --platform=${_PLATFORM} ${_ARGS} --push .']
