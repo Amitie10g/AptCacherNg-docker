@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM debian:testing-slim
 
 VOLUME ["/var/cache/apt-cacher-ng"]
 ARG DEBIAN_FRONTEND=noninteractive
